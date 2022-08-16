@@ -7,6 +7,15 @@ def get_voice_report(audioFile) :
     pitch = sound.to_pitch()
     pulse = parselmouth.praat.call([sound, pitch], "To PointProcess (cc)")
     voice_report = parselmouth.praat.call([sound, pitch, pulse], "Voice report", 0.0, 0.0, 75, 600, 1.3, 1.6, 0.03, 0.45)
+    # voice report parameters
+    # 0.0  : start time [sec] - PointProcess : Get jitter (local)
+    # 0.0  : end time [sec] (0.0 = all) - PointProcess : Get jitter (local)
+    # 75   : minimum pitch [Hz] - To pitch...
+    # 600  : maximum pitch [Hz] - To pitch...
+    # 1.3  : maximum period factor - PointProcess: Get jitter (local)
+    # 1.6  : maximum amplitude factor
+    # 0.03 : silence threshold - To Pitch(ac)...
+    # 0.45 : voicing threshold - To Pitch(ac)...
     return voice_report
 
 def voice_report_to_dictionary(voice_report, folder, filename) :
